@@ -100,4 +100,20 @@ function h($str)
     return htmlspecialchars($str, ENT_QUOTES);
 }
 
+function writeLog($label,$content){
+
+  $file_path = "../logs/log.txt";
+	$time_format = "Y-m-d H:i:s";
+	$myfile = fopen($file_path, "a+") or die("Unable to open file!");
+
+  $start_time = date($time_format);
+  fwrite($myfile, $start_time . "[$label]\n");
+  fwrite($myfile, $content."\n");
+
+  fclose($myfile);
+}
+
+
+
+
 ?>

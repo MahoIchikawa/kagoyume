@@ -102,7 +102,7 @@ function delete_profile($id){
 
 	//db接続を確立
 	$delete_db = connect2MySQL();
-	$delete_sql = "DELETE FROM user_t WHERE userID=:id";
+	$delete_sql = "UPDATE user_t SET deleteFlg=1 WHERE userID = :id";
 	//クエリとして用意
 	$delete_query = $delete_db->prepare($delete_sql);
 	$delete_query->bindValue(':id',$id);
@@ -115,4 +115,26 @@ function delete_profile($id){
 	}
 	return null;
 }
+
+//プロフィール更新
+function update_profile($id, $name, $password, $mail, $address){
+    //db接続を確立
+    $update_db = connect2MySQL();
+
+    $update_sql = "UPDATE user_t SET name='$name',password='$password',mail='$mail',address='$address' WHERE userID = $id";
+
+    //クエリとして用意
+    $update_query = $update_db->prepare($update_sql);
+
+    //var_dump($update_sql);
+
+    //SQLを実行
+    try{
+        $update_query->execute();
+    } catch (PDOException $e) {
+        $update_query=null;
+        return $e->getMessage();
+    }
+    return null;
+  }
 ?>

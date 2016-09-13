@@ -14,11 +14,12 @@
                $name = $_POST["username"];
                $pass = $_POST["password"];
                $result = login($name, $pass);
-              }
+               }
 
               if(count($result) <= 0){
                   $failedMessage= 'ユーザー名あるいはパスワードに誤りがあります。';
               }else{
+               $_SESSION['username'] = $name;
                header("location:top.php");  // メイン画面へ遷移
                exit();
               }
@@ -63,15 +64,13 @@
         <div class="form-group">
           <div class="col-md-12 text-center">
             <input type="submit" id="login" name="login" class="btn btn-primary" value="Login">
-            <input type="hidden" name="mode"  value="IN">
             <br>
             <a href="<?php echo REGIST; ?>">Create new account</a><br>
-
+            <form type="hidden" name="mode" action="common/nav_bar.php" value="IN" method="POST"></form>
           </div>
         </div>
         </fieldset>
         </form>
-
 
 
 </body>

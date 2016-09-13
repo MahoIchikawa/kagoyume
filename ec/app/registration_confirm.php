@@ -15,8 +15,6 @@ require_once '../util/scriptUtil.php'; ?>
 if(!isset($_POST['mode']) || $_POST['mode'] != "CONFIRM"){
     echo 'アクセスルートが不正です。もう一度トップページからやり直してください<br>';
   }else{
-  //セッションスタート
-    session_start();
 
     //ポストの存在チェックとセッションに値を格納しつつ、連想配列にポストされた値を格納
     $confirm_values = array(
@@ -62,14 +60,14 @@ if(!isset($_POST['mode']) || $_POST['mode'] != "CONFIRM"){
       </div>
     <br>
       <!-- Button -->
-
           <input type="submit" value="Save" class="btn btn-primary">
+          <input type="hidden" name="mode"  value="COMPLETE">
       </form>
 
   <?php  }else{ ?>
 
     <h2><div><font color="red">!!CAUTION!!</font></div></h2><br>
-    戻って再度入力を行ってください<br>
+    再度入力を行ってください<br>
     <h3>不完全な項目</h3>
     <?php
     //連想配列内の未入力項目を検出して表示
@@ -90,15 +88,15 @@ if(!isset($_POST['mode']) || $_POST['mode'] != "CONFIRM"){
             echo 'が未入力です<br>';
         }
     }?>
+  </form>
 <?php
   }?>
-</form>
 
-  <form >
+  <form action="<?php echo REGIST ?>" method="POST">
       <input type="submit" value="Back" class="btn btn-link">
   </form>
 
-<?php } ?>
+<?php }?>
 
 </fieldset>
 </body>

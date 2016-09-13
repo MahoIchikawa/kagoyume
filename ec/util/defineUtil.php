@@ -1,6 +1,7 @@
 <?php
 const TOP = 'top.php';                             //top
 const LOGIN = 'login.php';                         //login
+const LOG_OUT = 'logout.php';                     //logout
 const REGIST = 'registration.php';                //regst
 const REGIST_CONF = 'registration_confirm.php';    //regist confirm
 const REGIST_COMP = 'registration_complete.php';   //regist complete
@@ -14,5 +15,6 @@ const UPDATE_RESULT = 'my_update_result.php';    //update result
 const DELETE = 'my_delete.php';                  //delete
 const DELETE_RESULT = 'my_delete_result.php';    //delete result
 const SEARCH = 'search.php';                     //search
+const ITEM = 'item.php';                        //item
 
 ?>
