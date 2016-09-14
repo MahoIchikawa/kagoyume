@@ -1,6 +1,4 @@
-<?php require_once 'common/nav_bar.php';
-require_once '../util/scriptUtil.php';
-require_once '../util/dbaccessUtil.php';?>
+<?php require_once 'common/nav_bar.php';?>
 
 <body>
   <html lang="ja">
@@ -14,8 +12,8 @@ require_once '../util/dbaccessUtil.php';?>
 
 <?php
 
-    //$id = $_GET['id'];
-    $result = mydata(1); //GETで取得した値を入れる
+    $id = $_SESSION['id'];
+    $result = mydata($id); //GETで取得した値を入れる
 
     if(is_array($result)){
       if(count($result) > 0){

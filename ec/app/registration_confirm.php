@@ -1,5 +1,4 @@
-<?php require_once 'common/nav_bar.php';
-require_once '../util/scriptUtil.php'; ?>
+<?php require_once 'common/nav_bar.php'; ?>
 
 <body>
   <html lang="ja">

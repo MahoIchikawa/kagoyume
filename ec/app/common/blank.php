@@ -1,4 +1,8 @@
-<?php require_once '../util/defineUtil.php'; ?>
+<?php
+  require_once '../util/defineUtil.php';
+  require_once '../util/scriptUtil.php'; //共通ファイル読み込み(使用する前に、appidを指定してください。)
+  require_once '../util/dbaccessUtil.php';
+ ?>
 <html lang="ja">
 <head>
 

@@ -1,8 +1,10 @@
 <?php require_once 'common/nav_bar.php';
 require_once '../util/scriptUtil.php';
 
-//$log_content = $_SESSION['username'] . " logged in";
-//writeLog("LOGIN", $log_content);
+$ses_name = isset($_SESSION['username']) ? $_SESSION['username'] : "Stranger" ;
+//TOPpageログ
+$log_content = $ses_name. " move to Top page ";
+writeLog("TOP", $log_content);
 ?>
 
 <!DOCTYPE html>
@@ -29,7 +31,7 @@ require_once '../util/scriptUtil.php';
           <input type="text" class="center-block form-control input-lg" placeholder="Search item..." required=""
           name="search_term">
           <span class="input-group-btn">
-            <button class="btn btn-lg btn-primary" type="submit" name="search_btn">
+            <button class="btn btn-lg btn-primary" type="submit">
               <span class="glyphicon glyphicon-search"></span>
             </button></span>
         </div>

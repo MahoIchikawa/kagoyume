@@ -10,6 +10,7 @@
  }
 
  ?>
+
 <html>
 <body>
 
@@ -30,8 +31,11 @@
         <b class="text-info">Rating: <?php  echo $hit->Review->Rate;?> <span class="glyphicon glyphicon-star"></span></b>
         <br>
           <div class="btn-group　text-right" role="group">
-            <button type="button" class="btn btn-success"><span class="fa fa-plus"></span>&nbsp;Add to Cart</button>
-            <button type="button" class="btn btn-danger"><span class="fa fa-close"></span>&nbsp;Cancel</button>
+            <form action=" <?php echo ADD ?>" method="POST">
+            <button type="submit" class="btn btn-success" name="add_to_cart" value="<?php echo $hit->Code?>">Add to Cart</button>
+          </form>
+            <a class="btn btn-danger" href="<?php echo getSearchUrl();?>">Cancel</a>
+
           </div>
         <br>
           <p><?php echo $hit->Description; ?></p>

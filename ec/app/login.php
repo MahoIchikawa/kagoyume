@@ -1,6 +1,4 @@
 <?php
-    require_once '../util/defineUtil.php';
-    require_once '../util/dbaccessUtil.php';
     require_once 'common/nav_bar.php';
 
           //エラーメッセージの初期化
@@ -19,7 +17,17 @@
               if(count($result) <= 0){
                   $failedMessage= 'ユーザー名あるいはパスワードに誤りがあります。';
               }else{
+
+              $ses_name = isset($name) ? $name : "Stranger" ;
+              //loginログ
+              $log_content = $ses_name. " LOGIN";
+              writeLog("LOGIN", $log_content);
+
+              $data = $result[0];
                $_SESSION['username'] = $name;
+               $id = $data['userID'];
+               $_SESSION['id'] =$id;
+
                header("location:top.php");  // メイン画面へ遷移
                exit();
               }
@@ -58,7 +66,6 @@
         foreach($errorMessage as $message){ ?>
             <div><font color="red"><?php echo $message ?></font></div> <?php };?>
             <div><font color="red"><?php echo $failedMessage ?></font></div>
-
 
         <!-- Button -->
         <div class="form-group">

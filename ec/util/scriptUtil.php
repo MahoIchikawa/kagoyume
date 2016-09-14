@@ -1,5 +1,5 @@
 <?php
-
+require_once 'defineUtil.php';
 /**
  * フォームの再入力時に、すでにセッションに対応した値があるときはその値を返却する
  * @param type $name formのname属性
@@ -88,6 +88,11 @@ $sortOrder = array(
                    "-sold" => "売れ筋順"
                    );
 
+$shipping_types = array(
+                  "1" => "郵便",
+                  "2" => "宅急便",
+                  "0" => "その他",
+                  );
 /**
  * @brief 特殊文字を HTML エンティティに変換する
  * @param string $str 変換したい文字列
@@ -95,6 +100,7 @@ $sortOrder = array(
  * @return string html用に変換した文字列
  *
  */
+
 function h($str)
 {
     return htmlspecialchars($str, ENT_QUOTES);
@@ -113,7 +119,32 @@ function writeLog($label,$content){
   fclose($myfile);
 }
 
+function getItemByCode($item_code){
+  $appid = "dj0zaiZpPTl5bTFMbEFMd0RCTSZzPWNvbnN1bWVyc2VjcmV0Jng9ZDk-";
+  $url = "http://shopping.yahooapis.jp/ShoppingWebService/V1/itemLookup?appid=$appid&itemcode=$item_code&image_size=600&responsegroup=large";
+  $xml = simplexml_load_file($url);
+  if ($xml["firstResultPosition"] != 0) {
+      $hit = $xml->Result->Hit;
+      return $hit;
+  }
+  return null;
+}
 
-
-
+//検索したURLを残す
+function getSearchUrl(){
+  $url = SEARCH.'?';
+  if(isset($_COOKIE['sort'])){
+    $sort = $_COOKIE['sort'];
+    $url .= 'sort='.$sort.'&';
+  }
+  if(isset($_COOKIE['category_id'])){
+    $category_id = $_COOKIE['category_id'];
+    $url .= 'category_id='.$category_id.'&';
+  }
+  if(isset($_COOKIE['search_term'])){
+    $search_term = $_COOKIE['search_term'];
+    $url .= 'search_term='.$search_term;
+  }
+  return $url;
+}
 ?>

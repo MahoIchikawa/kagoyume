@@ -1,6 +1,15 @@
 <?php require_once 'common/nav_bar.php';
       require_once '../util/dbaccessUtil.php';
-      require_once '../util/scriptUtil.php'; ?>
+      require_once '../util/scriptUtil.php';
+
+      $ses_name = isset($_SESSION['username']) ? $_SESSION['username'] : "Stranger" ;
+      //UPDATE
+      $log_content = $ses_name. " UPDATED";
+        writeLog("UPDATE", $log_content);
+
+?>
+
+
 
 <body>
   <html lang="ja">
@@ -16,8 +25,6 @@
 if(!isset($_POST['mode'])){
     echo 'アクセスルートが不正です。もう一度トップページからやり直してください<br>';
   }else{
-  //セッションスタート
-    session_start();
 
     $name = $_SESSION['name'];
     $password = $_SESSION['password'];

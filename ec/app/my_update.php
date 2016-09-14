@@ -1,5 +1,4 @@
-<?php require_once 'common/nav_bar.php';
-require_once '../util/scriptUtil.php'; ?>
+<?php require_once 'common/nav_bar.php'; ?>
 
 <body>
   <html lang="ja">
@@ -15,8 +14,6 @@ require_once '../util/scriptUtil.php'; ?>
 if(!isset($_POST['mode']) || $_POST['mode'] != "CONFIRM"){
     echo 'アクセスルートが不正です。もう一度トップページからやり直してください<br>';
   }else{
-  //セッションスタート
-    session_start();
 
     //ポストの存在チェックとセッションに値を格納しつつ、連想配列にポストされた値を格納
     $confirm_values = array(

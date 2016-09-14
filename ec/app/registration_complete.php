@@ -1,6 +1,5 @@
 <?php require_once 'common/nav_bar.php';
-      require_once '../util/dbaccessUtil.php';
-      require_once '../util/scriptUtil.php'; ?>
+; ?>
 
 <body>
   <html lang="ja">

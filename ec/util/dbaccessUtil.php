@@ -61,6 +61,31 @@ function mydata($id){
 
 }
 
+//データ表示
+function myHistory($user_id){
+  //db接続を確立
+  $detail_db = connect2MySQL();
+
+  $detail_sql = "SELECT * FROM buy_t WHERE userID=:id";
+
+  //クエリとして用意
+  $detail_query = $detail_db->prepare($detail_sql);
+
+  $detail_query->bindValue(':id',$user_id);
+
+  //SQLを実行
+  try{
+      $detail_query->execute();
+  } catch (PDOException $e) {
+      $detail_query=null;
+      return $e->getMessage();
+  }
+
+  //レコードを連想配列として返却
+  return $detail_query->fetchAll(PDO::FETCH_ASSOC);
+
+}
+
 //新規登録
 function insert_profiles($name, $password, $mail, $address){
     //db接続を確立
@@ -96,6 +121,42 @@ function insert_profiles($name, $password, $mail, $address){
     $insert_db=null;
     return null;
 }
+
+//新規登録
+function insert_item($user_id, $item_code, $shipping_type){
+    //db接続を確立
+    $insert_db = connect2MySQL();
+
+    //DBに全項目のある1レコードを登録するSQL
+    $insert_sql = "INSERT INTO buy_t(userID,itemCode,type,buyDate)"
+            . "VALUES(:userID,:itemCode,:type,:buyDate)";
+
+    //現在時をdatetime型で取得
+    $datetime =new DateTime();
+    $date = $datetime->format('Y-m-d H:i:s');
+
+    //クエリとして用意
+    $insert_query = $insert_db->prepare($insert_sql);
+
+    //SQL文にセッションから受け取った値＆現在時をバインド
+    $insert_query->bindValue(':userID',$user_id);
+    $insert_query->bindValue(':itemCode',$item_code);
+    $insert_query->bindValue(':type',$shipping_type);
+    $insert_query->bindValue(':buyDate',$date);
+
+    //SQLを実行
+    try{
+        $insert_query->execute();
+    } catch (PDOException $e) {
+        //接続オブジェクトを初期化することでDB接続を切断
+        $insert_db=null;
+        return $e->getMessage();
+    }
+
+    $insert_db=null;
+    return null;
+}
+
 
 //削除
 function delete_profile($id){

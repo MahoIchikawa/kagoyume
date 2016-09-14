@@ -1,6 +1,10 @@
 <?php require_once 'common/nav_bar.php';
-require_once '../util/scriptUtil.php';
-require_once '../util/dbaccessUtil.php';?>
+
+$ses_name = isset($_SESSION['username']) ? $_SESSION['username'] : "Stranger" ;
+//DELETE
+$log_content = $ses_name. " DELETED";
+  writeLog("DELETE", $log_content);
+?>
 
 <body>
   <html lang="ja">
@@ -14,8 +18,8 @@ require_once '../util/dbaccessUtil.php';?>
 
 <?php
 
-    //$id = $_GET['id'];
-    $result = delete_profile(1); //GETで取得した値を入れる
+    $id = $_SESSION['id'];
+    $result = delete_profile($id); //GETで取得した値を入れる
 
     if(!isset($result)){
     ?>

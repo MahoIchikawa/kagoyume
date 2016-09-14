@@ -1,5 +1,12 @@
 <?php require_once 'common/nav_bar.php';
-      require_once '../util/dbaccessUtil.php'; ?>
+      require_once '../util/dbaccessUtil.php';
+
+      $ses_name = isset($_SESSION['username']) ? $_SESSION['username'] : "Stranger" ;
+        //MYDATAログ
+        $log_content = $ses_name. " move to Mydata ";
+        writeLog("MYDATA", $log_content);?>
+
+
 
 <div class="container">
     <h1>Edit Profile</h1>
@@ -12,15 +19,16 @@
         </div>
       </div>
 
-      <?php
-      //$id =  $_GET['id'];
-      $result = mydata(1); //$idでゲットする
+    <?php
+
+    $id =  $_SESSION['id'];
+    $result = mydata($id); //$idでゲットする
 
       if(is_array($result)){
         if(count($result) > 0){
           $data = $result[0];
         }else{
-          echo "ダメだよ！";
+          echo "<h2 class='text-center text-danger'>Please login!</h2>";
           die;
          }
        }
@@ -66,7 +74,7 @@
           <div class="form-group">
             <label class="col-md-3 control-label">Password:</label>
             <div class="col-md-8">
-              <input class="form-control" type="password" name="password" value="<?php echo $data['password'] ?>">
+              <input class="form-control" type="password" name="password" value="">
             </div>
           </div>
           <div class="form-group">
@@ -81,17 +89,16 @@
               <input type="submit" class="btn btn-primary" value="Save Changes">
               <input type="hidden" name="mode" value="CONFIRM">
         </form>
-            <form action="<?php echo TOP ?>" method="POST">
-              <input type="submit" class="btn btn-default" value="Cancel"><br>
-            </form>
+            <a href="<?php echo TOP ?>" class="btn btn-default"> Cancel</a><br>
             </div>
             </div>
 
 
       <?php //delete account ?>
-        <form class= "text-right">
+        <div class= "text-right">
+          <a href="<?php echo HISTORY; ?>"><span class="glyphicon glyphicon-time"></span> My History</a><br>
           <a href="<?php echo DELETE; ?>"><span class="glyphicon glyphicon-trash"></span>Delete MyAccount</a><br>
-        </form>
+        </div>
       </div>
   </div>
 </div>
