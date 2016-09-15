@@ -15,8 +15,6 @@
 if(!isset($_POST['mode'])){
     echo 'アクセスルートが不正です。もう一度トップページからやり直してください<br>';
   }else{
-  //セッションスタート
-    session_start();
 
     $name = $_SESSION['name'];
     $password = $_SESSION['password'];

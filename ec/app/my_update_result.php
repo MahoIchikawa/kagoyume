@@ -1,6 +1,4 @@
 <?php require_once 'common/nav_bar.php';
-      require_once '../util/dbaccessUtil.php';
-      require_once '../util/scriptUtil.php';
 
       $ses_name = isset($_SESSION['username']) ? $_SESSION['username'] : "Stranger" ;
       //UPDATE
